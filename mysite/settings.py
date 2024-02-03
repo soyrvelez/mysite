@@ -80,13 +80,8 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 MONGO_URI = os.getenv('MONGO_URI')
 DATABASES = {
     'default': {
-            'ENGINE': 'djongo',
-            'NAME': 'mysite',
-            'ENFORCE_SCHEMA': False,
-            'CLIENT': {
-                'host': MONGO_URI
-            }  
-        }
+            
+    }
 }
 
 
