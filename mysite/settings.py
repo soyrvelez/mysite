@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from mongoengine import connect
+connect(host=os.getenv('MONGO_URI'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,7 +82,8 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 MONGO_URI = os.getenv('MONGO_URI')
 DATABASES = {
     'default': {
-            
+            'ENGINE': "django.db.backends.postgresql",
+            "NAME": "mysite" 
     }
 }
 

@@ -17,6 +17,12 @@ print(db.polls_question.find_one())
 #     'pub_date': datetime.now()
 # })
 
+# TODO Search by question_text
+# TODO Search a question by a certain text
+# TODO Search all question by one date
+# TODO Update a question (pub_date -> needs to be set to current date)
+# TODO Delete a question
+
 print('searched question', db.polls_question.find_one({ '_id': ObjectId('65bb3ca9bef1212d861d3b2d') }))
 
 does_new_q_exist_in_db = False
