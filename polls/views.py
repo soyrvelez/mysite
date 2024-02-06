@@ -7,6 +7,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from django.http import HttpResponse
+from django.template import loader
 from django.shortcuts import get_object_or_404, render
 
 load_dotenv()
@@ -108,19 +109,6 @@ def update_question_date(question_id, new_pub_date):
     print('Question updated!')
     print('')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     context = {"latest_question_list": latest_question_list}
@@ -137,4 +125,3 @@ def results(request, question_id):
 
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
-
