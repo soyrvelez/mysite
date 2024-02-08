@@ -21,7 +21,7 @@ import psycopg2
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require', port=5433)
+conn = psycopg2.connect(DATABASE_URL, sslmode='require', port=5432)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,7 +94,7 @@ DATABASES = {
     #     'CONN_MAX_AGE': 600,
     # }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(default = os.getenv('DATABASE_URL'), conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

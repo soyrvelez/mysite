@@ -1,4 +1,4 @@
-﻿altgraph==0.17.3
+altgraph==0.17.3
 appdirs==1.4.4
 asgiref==3.7.2
 beautifulsoup4==4.12.3
