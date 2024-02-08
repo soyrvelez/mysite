@@ -19,7 +19,7 @@ load_dotenv()
 import dj_database_url
 import psycopg2
 
-DATABASE_URL = os.getenv['DATABASE_URL']
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
@@ -84,16 +84,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# MONGO_URI = os.getenv('MONGO_URI')
-# PASSWORD = os.getenv('PASSWORD')
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mysite',
-#         'PASSWORD': PASSWORD,
-#         'CONN_MAX_AGE': 600,
-#     }
-# }
+MONGO_URI = os.getenv('MONGO_URI')
+PASSWORD = os.getenv('PASSWORD')
+DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'mysite',
+    #     'PASSWORD': PASSWORD,
+    #     'CONN_MAX_AGE': 600,
+    # }
+}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
