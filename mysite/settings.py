@@ -87,14 +87,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 MONGO_URI = os.getenv('MONGO_URI')
 PASSWORD = os.getenv('PASSWORD')
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'mysite',
-    #     'PASSWORD': PASSWORD,
-    #     'CONN_MAX_AGE': 600,
-    # }
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
-DATABASES['default'] = dj_database_url.config(default = os.getenv('DATABASE_URL'), conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
