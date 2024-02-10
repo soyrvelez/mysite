@@ -58,7 +58,7 @@ python-decouple==3.4
 python-dotenv==0.17.0
 python-github==0.1.0.dev0
 QDarkStyle==2.8.1
-scikit-learn-intelex==2021.20210504.110836
+scikit-learn-intelex==2024.1.0
 selenium==3.141.0
 simplegeneric==0.8.1
 sklearn==0.0
