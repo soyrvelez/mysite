@@ -87,12 +87,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 MONGO_URI = os.getenv('MONGO_URI')
 PASSWORD = os.getenv('PASSWORD')
 DATABASES = {
-        # 'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'mysite',
-        # 'USER': 'postgres',
-        # 'PASSWORD': PASSWORD,
-        # }
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=600, ssl_require=True)
 }
 
