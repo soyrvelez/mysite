@@ -28,3 +28,24 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
+class Artist(models.Model):
+  name = models.CharField(max_length=100)
+
+  def __str__(self):
+    return self.name
+
+class Album(models.Model):
+  title = models.CharField(max_length=100)
+  artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.title
+
+class Song(models.Model):
+  title = models.CharField(max_length=100)
+  album = models.ForeignKey(Album, on_delete=models.CASCADE)
+  artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.title

@@ -188,7 +188,7 @@ def contact_view(request):
             sender = form.cleaned_data["sender"]
             cc_myself = form.cleaned_data["cc_myself"]
 
-            recipients = ["velez95@gmail.com"]
+            recipients = ["velez59@gmail.com"]
             if cc_myself:
                 recipients.append(sender)
 
