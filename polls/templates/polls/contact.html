@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="id_subject">Subject:</label>
+            {{ form.subject }}
+            {% if form.subject.errors %}
+                <div class="error">{{ form.subject.errors.as_text }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="id_message">Message:</label>
+            {{ form.message }}
+            {% if form.message.errors %}
+                <div class="error">{{ form.message.errors.as_text }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="id_sender">Your Email:</label>
+            {{ form.sender }}
+            {% if form.sender.errors %}
+                <div class="error">{{ form.sender.errors.as_text }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="id_cc_myself">
+                <input type="checkbox" name="cc_myself" id="id_cc_myself">
+                Send a copy to myself
+            </label>
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import dj_database_url
 import psycopg2
+from django.forms.renderers import TemplatesSetting
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
@@ -130,3 +131,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

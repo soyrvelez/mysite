@@ -11,8 +11,11 @@ from django.views import generic
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from django.utils import timezone
+from django.core.mail import send_mail
+
 
 from .models import Choice, Question
+from .forms import ContactForm, NameForm
 
 load_dotenv()
 
@@ -175,3 +178,23 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+            sender = form.cleaned_data["sender"]
+            cc_myself = form.cleaned_data["cc_myself"]
+
+            recipients = ["velez95@gmail.com"]
+            if cc_myself:
+                recipients.append(sender)
+
+            send_mail(subject, message, sender, recipients)
+            return HttpResponseRedirect("/thanks/")
+    else:
+        form = ContactForm()
+
+    return render(request, 'polls/contact.html', {'form': form})
