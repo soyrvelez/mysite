@@ -4,17 +4,17 @@ from datetime import datetime
 
 from bson import ObjectId
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 #imports for authentication
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views import generic
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -204,5 +204,26 @@ def contact_view(request):
 
     return render(request, 'polls/contact.html', {'form': form})
 
-def login(request):
-    pass
+def login_view(request):
+    """How we login to our app"""
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            u = form.cleaned_data['username']
+            p = form.cleaned_data['password']
+            user = authenticate(username=u, password=p)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(f'/user/{u}')
+                else:
+                    print(f'{u} - account has been disabled')
+                    return HttpResponseRedirect('/login')
+            else:
+                print('The username and/or password is incorrect')
+                return HttpResponseRedirect('/login')
+        else:
+            return HttpResponseRedirect('/login')
+    else:
+        form = AuthenticationForm()
+        return render(request, 'login.html', { 'form': form })
