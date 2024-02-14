@@ -22,7 +22,7 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponseRedirect(f'/user/{u}')
+                    return HttpResponseRedirect(f'/users/{u}')
                 else:
                     print(f'{u} - account has been disabled')
                     return HttpResponseRedirect('/login')
@@ -51,3 +51,8 @@ def signup_view(request):
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', { 'form': form })
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'profile.html', { 'user': user })

@@ -9,8 +9,9 @@
     <h1>Django Polls</h1>
 
     <header>
+      <a href="/polls">Polls</a>
       {% if user.is_authenticated %}
-        <span><a href="/user/{{user.username}}">Hello, {{user.username}}</a></span>
+        <span><a href="/users/{{user.username}}">Hello, {{user.username}}</a></span>
         <span><a href="/logout">Logout</a></span>
         {% else %}
           <span><a href="/login">Login</a></span>
