@@ -3,19 +3,24 @@ import os
 from datetime import datetime
 
 from bson import ObjectId
+from django.contrib.auth import authenticate, login, logout
+#imports for authentication
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.urls import reverse
+from django.utils import timezone
 from django.views import generic
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from django.utils import timezone
-from django.core.mail import send_mail
 
-
-from .models import Choice, Question
 from .forms import ContactForm, NameForm
+from .models import Choice, Question
 
 load_dotenv()
 
@@ -198,3 +203,6 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, 'polls/contact.html', {'form': form})
+
+def login(request):
+    pass

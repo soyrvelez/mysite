@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Django Polls</title>
+</head>
+<body>
+    <h1>Django Polls</h1>
+
+    <header>
+      {% if user.is_authenticated %}
+        <span><a href="/user/{{user.username}}">Hello, {{user.username}}</a></span>
+        <span><a href="/logout">Logout</a></span>
+        {% else %}
+          <span><a href="/login">Login</a></span>
+          <span><a href="/signup">Signup</a></span>
+        {% endif %}
+
+    </header>
+
+    <main>
+      {% block content %}
+
+      {% endblock %}
+    </main>
+    <footer>All Rights Reserved, Django Polls 2024</footer>
+</body>
+</html>
