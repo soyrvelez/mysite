@@ -1,11 +1,12 @@
-from django.shortcuts import render, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 #imports for authentication
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
-from django.utils.decorators import method_decorator
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import HttpResponse, render
+from django.utils.decorators import method_decorator
+
 
 def home(request):
     return render(request, "index.html")
@@ -33,3 +34,20 @@ def login_view(request):
     else:
         form = AuthenticationForm()
         return render(request, 'login.html', { 'form': form })
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return HttpResponseRedirect('/polls')
+        else:
+            return HttpResponseRedirect('/signup')
+    else:
+        form = UserCreationForm()
+        return render(request, 'signup.html', { 'form': form })
